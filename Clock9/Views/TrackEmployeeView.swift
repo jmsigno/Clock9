@@ -66,7 +66,7 @@ struct TrackEmployeeView: View {
             self.fetchEmployeeLastLocation(email: self.employee.email)
         }
     }
-    
+    // Second Commit
     
     func fetchEmployeeLastLocation(email: String) {
         
