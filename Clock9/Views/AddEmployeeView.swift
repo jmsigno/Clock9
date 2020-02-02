@@ -167,6 +167,7 @@ struct AddEmployeeView: View {
                         //                                                .background(Color.white)
                         .font(.body)
                         .foregroundColor(Color.init(red: 0.742, green: 0.242, blue: 0.242))
+                        .autocapitalization(UITextAutocapitalizationType.none)
                         .padding()
                         .alert(isPresented:$checkUserAlert) {
                             Alert(title: Text("Check Email"), message: Text("Employee already exist with the email ID."), dismissButton: .default(Text("OK")))

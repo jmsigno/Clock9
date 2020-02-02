@@ -26,7 +26,7 @@ struct EmployeeList: View {
             }
             .resizable()
             .frame(width: 60, height: 60)
-            .aspectRatio(contentMode: .fit)
+            .aspectRatio(contentMode: .fill)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 1))
             .shadow(radius: 5)

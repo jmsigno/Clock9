@@ -30,7 +30,7 @@ struct LoginScreen: View {
                 HStack{
                     
                     Image(systemName: "person.fill").resizable().frame(width: 20, height: 20).foregroundColor(.secondary)
-                    TextField("Username", text: $user).padding(.leading, 12).font(.system(size: 20))
+                    TextField("Username", text: $user).padding(.leading, 12).font(.system(size: 20)).autocapitalization(UITextAutocapitalizationType.none)
                 }
                 .padding()
                 .background(Color("3"))
