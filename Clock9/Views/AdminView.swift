@@ -98,6 +98,9 @@ struct AdminView: View {
     
     
     func deleteEmployee(at offsets: IndexSet) {
+        if let empObject = manage.employees[offsets.first!] as Employee? {
+            manage.deleteEmployee(email: empObject.email)
+        }
         manage.employees.remove(atOffsets: offsets)
     }
 }

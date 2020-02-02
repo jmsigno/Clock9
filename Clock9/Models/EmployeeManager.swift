@@ -50,6 +50,18 @@ class EmployeeManager : ObservableObject {
         
     }
     
+    func deleteEmployee(email: String) {
+        
+        let newEmail = email.replacingOccurrences(of: ".", with: ",") // Firebase doesn't allow . so replaced it with ,
+        let usersRef: DatabaseReference = Database.database().reference().child("users")
+        let employeeRef: DatabaseReference = usersRef.child(newEmail)
+        
+        employeeRef.removeValue { error, _ in
+            print(error ?? "Employee Deleted.")
+        }
+        
+    }
+    
     
     // Firebase Database
     lazy var usersRef: DatabaseReference = Database.database().reference().child("users")
