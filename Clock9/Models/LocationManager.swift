@@ -2,7 +2,7 @@
 //  LocationManager.swift
 //  Clock9
 //
-//  Created by Ankit Khanna on 25/01/20.
+//  Created by Jdrake on 25/01/20.
 //  Copyright © 2020 jmsigno. All rights reserved.
 //
 

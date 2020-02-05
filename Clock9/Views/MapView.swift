@@ -2,7 +2,7 @@
 //  MapView.swift
 //  Clock9
 //
-//  Created by Ankit Khanna on 24/01/20.
+//  Created by Jdrake on 24/01/20.
 //  Copyright © 2020 jmsigno. All rights reserved.
 //
 
@@ -15,11 +15,13 @@ struct MapView: UIViewRepresentable {
     @ObservedObject var currentLocationManager = CurrentLocationManager()
     var userLatitude: CLLocationDegrees
     var userLongitude: CLLocationDegrees
+    var empName: String
     
     
-    init(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, employeeName: String) {
         self.userLatitude = latitude
         self.userLongitude = longitude
+        self.empName = employeeName
     }
     
     
@@ -47,8 +49,7 @@ struct MapView: UIViewRepresentable {
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
-        annotation.title = "Employee"
-//        annotation.subtitle = "London"
+        annotation.title = empName + " is here!"
         uiView.addAnnotation(annotation)
     }
 }

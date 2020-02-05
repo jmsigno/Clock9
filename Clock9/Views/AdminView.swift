@@ -67,7 +67,7 @@ struct AdminView: View {
             .tag(1)
             VStack{
                 
-                Text("Home")
+                Text("Profile")
                 Button(action: {
                     
                     try! Auth.auth().signOut()
@@ -83,7 +83,7 @@ struct AdminView: View {
             .tabItem{
                 VStack{
                     Image(systemName: "person.crop.circle.fill")
-                    Text("Settings")
+                    Text("Profile")
                 }
             }
             .tag(2)

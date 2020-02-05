@@ -20,14 +20,14 @@ struct TrackEmployeeView: View {
     
     var email = UserDefaults.standard.string(forKey: "loggedInUser")
 
-    @State var currentLat: CLLocationDegrees = 23.19023 // Default Lat
-    @State var currentLong: CLLocationDegrees = 77.4679 // Default Long
+    @State var currentLat: CLLocationDegrees = -37.818212 // Default Lat
+    @State var currentLong: CLLocationDegrees = 144.9521133 // Default Long
     
     var body: some View {
         
         NavigationView {
             VStack {
-                MapView(latitude: currentLat, longitude: currentLong)
+                MapView(latitude: currentLat, longitude: currentLong, employeeName: employee.name)
                     .frame(width: 425, height: 500, alignment: .top)
                     .navigationBarTitle(Text("Track Employee"),displayMode: .inline)
                     .edgesIgnoringSafeArea(.bottom)

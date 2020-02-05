@@ -2,7 +2,7 @@
 //  MapAnnotations.swift
 //  Clock9
 //
-//  Created by Ankit Khanna on 24/01/20.
+//  Created by Jdrake on 24/01/20.
 //  Copyright © 2020 jmsigno. All rights reserved.
 //
 

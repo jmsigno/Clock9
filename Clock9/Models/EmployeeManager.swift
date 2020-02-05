@@ -73,16 +73,11 @@ class EmployeeManager : ObservableObject {
             let resultData = snapshot.value as! Dictionary<String, String>
 //            print(resultData)
             if let userId = resultData["userId"] as String?, let password = resultData["password"] as String?, let email = resultData["email"] as String?, let employeeName = resultData["employeeName"] as String?, let phone = resultData["phone"] as String?, let userType = resultData["userType"] as String?, let imageURLs = resultData["imageURL"] as String?, userId.count > 0 {
-                if (userType == "Admin") {
-                    // Ignore the Admin users and show only the employees
-                } else {
+                if (userType == "Employee") {
                     // Append Firebase DB Results to the Employee Struct
                     self.employees.append(Employee(name: employeeName, email: email, password: password, phone: phone, userType: Int(userType) ?? 2, imageUrl: imageURLs))
                 }
-                
             }
-            
-            
         })
     }
     //let didChange = PassthroughSubject<Void, Never>()

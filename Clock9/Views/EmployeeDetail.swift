@@ -37,7 +37,6 @@ struct EmployeeDetail: View {
                         Text("Name: \(employee.name)")
                         Text("Email: \(employee.email)")
                         Text("Phone: \(employee.phone)")
-                        //                        Text("Dummy Text")
                     }
                     .padding(20)
                     .background(Color.white.opacity(0.7))
