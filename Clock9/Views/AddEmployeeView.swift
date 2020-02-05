@@ -18,6 +18,7 @@ struct AddEmployeeView: View {
     @State private var email: String =  ""
     @State private var password: String =  ""
     @State private var phone: String =  ""
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
     @State private var showingAlert = false
@@ -151,7 +152,9 @@ struct AddEmployeeView: View {
                         .foregroundColor(Color.init(red: 0.742, green: 0.242, blue: 0.242))
                         .padding()
                         .alert(isPresented:$showingAlert) {
-                            Alert(title: Text("Create Employee"), message: Text("Employee created successfully."), dismissButton: .default(Text("OK")))
+                            Alert(title: Text("Create Employee"), message: Text("Employee created successfully."), dismissButton: .default(Text("OK")){
+                                self.presentationMode.wrappedValue.dismiss()
+                                })
                     }
                 }.padding(.top, 50)
                 
@@ -260,6 +263,7 @@ struct AddEmployeeView: View {
         })
         
     }
+
     
     // Create Employee Function
     func createEmployee() {

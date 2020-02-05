@@ -10,16 +10,14 @@ import Foundation
 import CoreLocation
 import Combine
 import Firebase
-
+import SwiftUI
 
 class EmployeeLocationManager: NSObject, ObservableObject {
     
     //     var latitude : String
     //     var longitude : String
     //     var time: String
-    
-    
-    
+
     
     override init() {
         super.init()
@@ -93,22 +91,24 @@ class EmployeeLocationManager: NSObject, ObservableObject {
     }
     
     
-
+    
+    
+    
     
 }
 
 extension EmployeeLocationManager: CLLocationManagerDelegate {
-
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         self.locationStatus = status
         print(#function, statusString)
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         self.lastLocation = location
         print(#function, location)
     }
-
+    
 }
 

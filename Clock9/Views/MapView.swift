@@ -13,14 +13,23 @@ import MapKit
 struct MapView: UIViewRepresentable {
 
     @ObservedObject var currentLocationManager = CurrentLocationManager()
+    var userLatitude: CLLocationDegrees
+    var userLongitude: CLLocationDegrees
     
-    var userLatitude: CLLocationDegrees {
-        return currentLocationManager.lastLocation?.coordinate.latitude ?? 0
+    
+    init(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        self.userLatitude = latitude
+        self.userLongitude = longitude
     }
-
-    var userLongitude: CLLocationDegrees {
-        return currentLocationManager.lastLocation?.coordinate.longitude ?? 0
-    }
+    
+    
+//    var userLatitude: CLLocationDegrees {
+//        return currentLocationManager.lastLocation?.coordinate.latitude ?? 0
+//    }
+//
+//    var userLongitude: CLLocationDegrees {
+//        return currentLocationManager.lastLocation?.coordinate.longitude ?? 0
+//    }
     
     
     func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {

@@ -11,32 +11,23 @@ import MapKit
 import CoreLocation
 import Firebase
 
-struct LatLong {
-    var latitude : CLLocationDegrees
-    var longitude : CLLocationDegrees
-}
 
 struct TrackEmployeeView: View {
     let employee: Employee
     @ObservedObject var location = LocationManager()
     @ObservedObject var currentLocationManager = CurrentLocationManager()
-//    @ObservedObject var employeeLocationManager = EmployeeLocationManager()
-    var email = UserDefaults.standard.string(forKey: "loggedInUser")
-    var userLatitude: String {
-        return "\(currentLocationManager.lastLocation?.coordinate.latitude ?? 0)"
-    }
-
-    var userLongitude: String {
-        return "\(currentLocationManager.lastLocation?.coordinate.longitude ?? 0)"
-    }
-
+    @ObservedObject var employeeLocationManager = EmployeeLocationManager()
     
+    var email = UserDefaults.standard.string(forKey: "loggedInUser")
+
+    @State var currentLat: CLLocationDegrees = 23.19023 // Default Lat
+    @State var currentLong: CLLocationDegrees = 77.4679 // Default Long
     
     var body: some View {
         
         NavigationView {
             VStack {
-                MapView()
+                MapView(latitude: currentLat, longitude: currentLong)
                     .frame(width: 425, height: 500, alignment: .top)
                     .navigationBarTitle(Text("Track Employee"),displayMode: .inline)
                     .edgesIgnoringSafeArea(.bottom)
@@ -45,8 +36,14 @@ struct TrackEmployeeView: View {
                     Section{
                         ForEach(location.locations) { loca in
                             VStack(alignment: .leading) {
-                                Text("Latitude: \(loca.latitude), Longitude: \(loca.longitude)")
-                                Text("Time: \(loca.time)")
+                                Button(action: {
+                                    self.currentLat = CLLocationDegrees(loca.latitude)!
+                                    self.currentLong = CLLocationDegrees(loca.longitude)!
+                                }) {
+                                    Text("Latitude: \(loca.latitude), Longitude: \(loca.longitude)")
+                                    Text("Time: \(loca.time)")
+                                        .foregroundColor(.green)
+                                }
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                             }
@@ -55,45 +52,49 @@ struct TrackEmployeeView: View {
                     
                     //                    .onDelete(perform: deleteEmployee)
                     //                    }
-                }.frame(width: 425, height: 300, alignment: .bottom)
+                }.frame(width: 400, height: 300, alignment: .bottomLeading)
             }
             
             
             
         }
         .onAppear {
-            self.location.fetchLocations()
+//            self.location.fetchLocations()
             self.fetchEmployeeLastLocation(email: self.employee.email)
         }
     }
     
+    mutating func assignLocationValue (lat: CLLocationDegrees, long: CLLocationDegrees) {
+        self.currentLat = lat
+        self.currentLong = long
+    }
+    
     func fetchEmployeeLastLocation(email: String) {
-        
-        let lat: CLLocationDegrees = 23.19023000 // Bhopal lat, long
-        let long: CLLocationDegrees = 77.46790000 // Bhopal lat, long
-        
-        let date = Date()
-        let currentFormatter = DateFormatter()
-        currentFormatter.dateStyle = .medium
-        let todaysDate = currentFormatter.string(from: date)
         
         let usersRef: DatabaseReference = Database.database().reference()
         
         let newEmail = email.replacingOccurrences(of: ".", with: ",") // Firebase doesn't allow . so replaced it with ,
         
-        usersRef.child("employees").child(newEmail).observeSingleEvent(of: .value, with: { (snapshot) in
-
-            if snapshot.hasChild(newEmail){
-                print("Employee Exist")
-                for key in snapshot.key {
-                    print("Key:\(key)")
-                }
-            } else {
-                print("User does not exist")
+        usersRef.child("employees").child(newEmail).observeSingleEvent(of: .value, with: { snapshot in
+            
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
+                let dict = child.value as? [String : AnyObject] ?? [:]
+                let id = UUID()
+                print(dict["lat"] ?? "No Latitude")
+                print(dict["long"] ?? "No Longitude")
+                let latitude = "\(String(describing: dict["lat"]!))"
+                let longitude = "\(String(describing: dict["long"]!))"
+                let date = "\(String(describing: dict["date"]!))"
+                let name = "\(String(describing: dict["employeeName"]!))"
+                let userId = "\(String(describing: dict["userId"]!))"
+                let email = "\(String(describing: dict["email"]!))"
+                let loca = Location(id: id, latitude: latitude, longitude: longitude, time: date, name: name, userId: userId, email: email)
+                self.location.locations.append(loca)
             }
         })
-
+        
     }
+
     
     
 }
