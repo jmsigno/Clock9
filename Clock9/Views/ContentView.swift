@@ -19,7 +19,6 @@ struct ContentView: View {
                 } else {
                      EmployeeUIView()
                 }
-
             }
             else{
                 LoginScreen()
