@@ -50,6 +50,18 @@ class EmployeeManager : ObservableObject {
         
     }
     
+    func deleteEmployee(email: String) {
+        
+        let newEmail = email.replacingOccurrences(of: ".", with: ",") // Firebase doesn't allow . so replaced it with ,
+        let usersRef: DatabaseReference = Database.database().reference().child("users")
+        let employeeRef: DatabaseReference = usersRef.child(newEmail)
+        
+        employeeRef.removeValue { error, _ in
+            print(error ?? "Employee Deleted.")
+        }
+        
+    }
+    
     
     // Firebase Database
     lazy var usersRef: DatabaseReference = Database.database().reference().child("users")
@@ -61,8 +73,13 @@ class EmployeeManager : ObservableObject {
             let resultData = snapshot.value as! Dictionary<String, String>
 //            print(resultData)
             if let userId = resultData["userId"] as String?, let password = resultData["password"] as String?, let email = resultData["email"] as String?, let employeeName = resultData["employeeName"] as String?, let phone = resultData["phone"] as String?, let userType = resultData["userType"] as String?, let imageURLs = resultData["imageURL"] as String?, userId.count > 0 {
-                // Append Firebase DB Results to the Employee Struct
-                self.employees.append(Employee(name: employeeName, email: email, password: password, phone: phone, userType: Int(userType) ?? 2, imageUrl: imageURLs))
+                if (userType == "Admin") {
+                    // Ignore the Admin users and show only the employees
+                } else {
+                    // Append Firebase DB Results to the Employee Struct
+                    self.employees.append(Employee(name: employeeName, email: email, password: password, phone: phone, userType: Int(userType) ?? 2, imageUrl: imageURLs))
+                }
+                
             }
             
             

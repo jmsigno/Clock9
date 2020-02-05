@@ -12,7 +12,7 @@ import GoogleSignIn
 
 struct AdminView: View {
     @ObservedObject var manage = EmployeeManager()
-
+    @State private var showModal = false
     
     //    ref = Database.database().reference()
     var body: some View {
@@ -22,11 +22,19 @@ struct AdminView: View {
             NavigationView{
                 List{
                     Section{
-                        
-                        NavigationLink(destination: AddEmployeeView()) {
-                            Text("Add Employee")
+                        Button(action: {
+                              self.showModal = true
+                          }) {
+                              Text("Add Employee")
                                 .foregroundColor(.green)
-                        }
+                          }.sheet(isPresented: self.$showModal) {
+                              AddEmployeeView()
+                          }
+                        
+//                        NavigationLink(destination: AddEmployeeView()) {
+//                            Text("Add Employee")
+//                                .foregroundColor(.green)
+//                        }
 
                         
                     }
@@ -98,6 +106,9 @@ struct AdminView: View {
     
     
     func deleteEmployee(at offsets: IndexSet) {
+        if let empObject = manage.employees[offsets.first!] as Employee? {
+            manage.deleteEmployee(email: empObject.email)
+        }
         manage.employees.remove(atOffsets: offsets)
     }
 }
