@@ -86,7 +86,7 @@ struct EmployeeDetail: View {
                                 .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                                 //.cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
                                 .background(Color.white)
-                                NavigationLink(destination: Text("Edit Details View"), tag: 4, selection: $selection) {
+                                NavigationLink(destination: EditEmployeeView(employee: employee), tag: 4, selection: $selection) {
                                         Image(systemName: "person.circle.fill")
                                             .resizable()
                                             .frame(width: 40, height: 40, alignment: .center)

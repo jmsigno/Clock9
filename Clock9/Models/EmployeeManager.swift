@@ -50,6 +50,35 @@ class EmployeeManager : ObservableObject {
         
     }
     
+    func editEmployee(id: UUID, name: String, email: String, password: String, phone: String, type: Int, firebaseURL: String) {
+          // Firebase Database
+          let userID = "\(id)"
+          let newEmail = email.replacingOccurrences(of: ".", with: ",") // Firebase doesn't allow . so replaced it with ,
+          let usersRef: DatabaseReference = Database.database().reference().child("users")
+          let employeeRef: DatabaseReference = usersRef.child(newEmail)
+          var userType: String { // User Type 1 is Admin 2 is Employee
+              if type == 1 {
+                  return "Admin"
+              } else if type == 2 {
+                  return "Employee"
+              }
+              return "Invalid Employee"
+          }
+          // Formatting the data as per Firebase
+          let employeeItem = [
+              "userId": userID,
+              "employeeName": name,
+              "email": email,
+              "password": password,
+              "phone": phone,
+              "userType": userType, // User Type 1 is Admin 2 is Employee
+              "imageURL": firebaseURL
+          ]
+          employeeRef.setValue(employeeItem)
+          
+          
+      }
+    
     func deleteEmployee(email: String) {
         
         let newEmail = email.replacingOccurrences(of: ".", with: ",") // Firebase doesn't allow . so replaced it with ,
