@@ -17,17 +17,22 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            if status{
-                if self.isUnlocked {
-                    Text("Unlocked")
-                    if userType == "Admin" {
-                        AdminView()
-                    } else {
-                        EmployeeUIView()
-                    }
+            if status {
+                if userType == "Admin" {
+                    AdminView()
                 } else {
-                    LoginScreen()
+                    EmployeeUIView()
                 }
+//                if self.isUnlocked {
+//                    Text("Unlocked")
+//                    if userType == "Admin" {
+//                        AdminView()
+//                    } else {
+//                        EmployeeUIView()
+//                    }
+//                } else {
+//                    LoginScreen()
+//                }
             }
             else{
                 LoginScreen()
