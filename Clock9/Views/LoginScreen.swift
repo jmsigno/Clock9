@@ -25,7 +25,7 @@ struct LoginScreen: View {
             
             VStack(alignment: .center, spacing: 22, content: {
                 
-                Image("clock9-logo").resizable().frame(width: 200, height: 200).padding(.bottom, 15)
+                Image("clock9-logo").resizable().frame(width: 200, height: 200).padding(.bottom, 100)
                 
                 HStack{
                     
@@ -36,6 +36,7 @@ struct LoginScreen: View {
                 .background(Color("3"))
                 .clipShape(RoundedRectangle(cornerRadius: 50))
                 .shadow(radius: 10)
+            
                 
                 HStack{
                     

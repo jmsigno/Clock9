@@ -13,6 +13,7 @@ import GoogleSignIn
 struct AdminView: View {
     @ObservedObject var manage = EmployeeManager()
     @State private var showModal = false
+    @State var isProfileViewPresented = false
     
     //    ref = Database.database().reference()
     var body: some View {
@@ -30,14 +31,8 @@ struct AdminView: View {
                           }.sheet(isPresented: self.$showModal) {
                               AddEmployeeView()
                           }
-                        
-//                        NavigationLink(destination: AddEmployeeView()) {
-//                            Text("Add Employee")
-//                                .foregroundColor(.green)
-//                        }
-
-                        
                     }
+                    
                     Section{
             
                         ForEach(manage.employees) { employee in
@@ -47,7 +42,7 @@ struct AdminView: View {
                     }
                 }
                 .navigationBarTitle(Text("Employees"), displayMode: .inline)
-                    .listStyle(GroupedListStyle()) //grouping the sections
+                .listStyle(GroupedListStyle()) //grouping the sections
             }
             .tabItem{
                 VStack{
@@ -65,21 +60,8 @@ struct AdminView: View {
                     }
             }
             .tag(1)
-            VStack{
-                
-                Text("Profile")
-                Button(action: {
-                    
-                    try! Auth.auth().signOut()
-                    GIDSignIn.sharedInstance()?.signOut()
-                    UserDefaults.standard.set(false, forKey: "status")
-                    NotificationCenter.default.post(name: NSNotification.Name("statusChange"), object: nil)
-                    
-                }) {
-                    
-                    Text("Logout")
-                }
-            }
+            
+            ProfileView()
             .tabItem{
                 VStack{
                     Image(systemName: "person.crop.circle.fill")
@@ -94,14 +76,10 @@ struct AdminView: View {
         }
         
     }
-  
-    
-    
+
     //create add employee interface
     func addEmployee(){
-        
         manage.employees.append(Employee(name: "War Machine", email: "warmachine@clock9.com", password: "123456", phone: "1284321", userType: 2, imageUrl: ""))
-        
     }
     
     
@@ -115,7 +93,23 @@ struct AdminView: View {
 
 struct AdminView_Previews: PreviewProvider {
     static var previews: some View {
-        AdminView(manage: EmployeeManager(employees: testData))
+        
+        Group{
+            AdminView(manage: EmployeeManager(employees: testData))
             .environment(\.colorScheme, .dark)
+            .previewDisplayName("Default")
+            
+            AdminView(manage: EmployeeManager(employees: testData))
+            .previewDevice(PreviewDevice(rawValue: "iPhone 10"))
+            .previewDisplayName("iPhone 10")
+            .environment(\.colorScheme, .dark)
+            
+            AdminView(manage: EmployeeManager(employees: testData))
+            .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
+            .previewDisplayName("XS Max")
+            .environment(\.colorScheme, .dark)
+    
+        }
+        
     }
 }

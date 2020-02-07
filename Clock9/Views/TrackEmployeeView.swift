@@ -29,7 +29,7 @@ struct TrackEmployeeView: View {
             VStack {
                 MapView(latitude: currentLat, longitude: currentLong, employeeName: employee.name)
                     .frame(width: 425, height: 500, alignment: .top)
-                    .navigationBarTitle(Text("Track Employee"),displayMode: .inline)
+                    .navigationBarTitle(Text("\(employee.name)'s Locations"),displayMode: .inline)
                     .edgesIgnoringSafeArea(.bottom)
                 
                 List {

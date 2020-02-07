@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2444C4CF23ECFF4500E99DA1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2444C4CE23ECFF4500E99DA1 /* ProfileView.swift */; };
 		370A1067112A31129C0AB590 /* Pods_Clock9.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D1C6534B24BDE48DA87A4B /* Pods_Clock9.framework */; };
 		850F134723D30CC000468CB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F134623D30CC000468CB4 /* AppDelegate.swift */; };
 		850F134923D30CC000468CB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F134823D30CC000468CB4 /* SceneDelegate.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2444C4CE23ECFF4500E99DA1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		26D1C6534B24BDE48DA87A4B /* Pods_Clock9.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock9.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		850F134323D30CC000468CB4 /* Clock9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clock9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		850F134623D30CC000468CB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				856BDF7823D5A3F300DC73B3 /* AdminView.swift */,
 				C56B049523D72D24006976D2 /* TrackEmployeeView.swift */,
 				850F135C23D315CF00468CB4 /* EmployeeListView.swift */,
+				2444C4CE23ECFF4500E99DA1 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				8523F9A623E719FD00829A7F /* EmployeeLocationManager.swift in Sources */,
 				C56B049623D72D24006976D2 /* TrackEmployeeView.swift in Sources */,
 				850F136723D3458400468CB4 /* EmployeeDetail.swift in Sources */,
+				2444C4CF23ECFF4500E99DA1 /* ProfileView.swift in Sources */,
 				C56B04AC23DB4101006976D2 /* MapAnnotations.swift in Sources */,
 				C56B049823D82D25006976D2 /* AddEmployeeView.swift in Sources */,
 				850F134B23D30CC000468CB4 /* ContentView.swift in Sources */,

@@ -51,6 +51,7 @@ struct EmployeeDetail: View {
                             
                             Spacer()
                             
+                            
                             HStack{
                                 NavigationLink(destination: TrackEmployeeView(employee: employee), tag: 1, selection: $selection) {
                                         Image(systemName: "location.circle.fill")
@@ -62,7 +63,7 @@ struct EmployeeDetail: View {
                                 .frame(maxWidth: .infinity)
                                 .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                                 //.cornerRadius(10)
-                                .background(Color.white)
+                                    .background(Color.white)
                                 NavigationLink(destination: Text("Attendace View"), tag: 2, selection: $selection) {
                                         Image(systemName: "clock.fill")
                                             .resizable()
