@@ -1,8 +1,8 @@
 //
-//  EmployeeUIView.swift
+//  EmployeeView.swift
 //  Clock9
 //
-//  Created by Jdrake on 01/02/20.
+//  Created by Jdrake on 8/2/20.
 //  Copyright © 2020 jmsigno. All rights reserved.
 //
 
@@ -10,7 +10,9 @@ import SwiftUI
 import Firebase
 import CoreLocation
 
-struct EmployeeUIView: View {
+struct EmployeeView: View {
+    @State private var clockIn: Bool = false
+    @State private var clockOut: Bool = false
     @ObservedObject var manage = EmployeeManager()
     @ObservedObject var locationManager = EmployeeLocationManager()
     @ObservedObject var employeeAttendanceManager = EmployeeAttendanceManager()
@@ -37,89 +39,66 @@ struct EmployeeUIView: View {
     @State var clockInTime = "Not Clocked In"
     @State var clockOutTime = "Not Clocked Out"
     
-    
-    
-    
     var body: some View {
-        
         TabView{
             
-            NavigationView{
-                VStack {
-                    //                    Clock In Label
-                    HStack {
-                        Text("Clock In: ")
-                            .padding()
-                        Text(clockInTime).foregroundColor(.green)
-                        
-                    }
-                    //                    Clock Out Label
-                    HStack {
-                        Text("Clock Out: ")
-                            .padding()
-                        Text(clockOutTime).foregroundColor(.green)
-                        
-                    }
-                    
-                    // Update Location Button
-                    Button(action: {
-                        print("Update Location Button Tapped")
-                        self.locationManager.updateLocation(email: self.email ?? "", id: self.userId ?? "", name: self.name ?? "", lat: self.userLatitude, long: self.userLongitude)
-                    }) {
+            VStack{
+                HStack{
+                    VStack(alignment: .leading, spacing: 10){
                         HStack {
-                            Image(systemName: "clock.fill")
-                                .resizable()
-                                .frame(width: 35, height: 35, alignment: .leading)
-                                .foregroundColor(.white)
-                                .padding()
+                            Text("Clock In: ")
+                            Text(clockInTime).foregroundColor(.blue)
                             
-                            Text("Update Current Location")
-                                .foregroundColor(.white)
-                                .fontWeight(.bold)
-                                .font(.system(size: 20))
-                                .padding(Edge.Set.trailing, 65)
+                        }
+                        HStack {
+                            Text("Clock Out: ")
+                            Text(clockOutTime).foregroundColor(.blue)
+                            
+                        }
+                    }.padding()
+                    Spacer()
+                }.padding()
+                
+                
+                Spacer()
+                Image(systemName: "clock.fill")
+                .resizable()
+                .frame(width: 160, height: 160)
+                    .foregroundColor(clockOut ? .secondary : (clockIn ? .red : .green))
+                .clipShape(Circle())
+                .onTapGesture {
+                    withAnimation(.default) {
+                        if !self.clockOut{
+                            self.isClockedIn(email: self.email!)
                         }
                     }
-                    .frame(width: 300, height: 60, alignment: .center)
-                    .background(Color.init(red: 0.42, green: 0.2, blue: 0.42))
-                    .cornerRadius(CGFloat(20))
-                    .padding(.bottom)
-                    
-                    // Clock In Button
-                    Button(action: {
-                        print("Clock-In/ Out Button Tapped")
-                        self.checkIfAlreadyClockIn(email: self.email!)
-                    }) {
-                        HStack {
-                            Image(systemName: "clock.fill")
-                                .resizable()
-                                .frame(width: 35, height: 35, alignment: .leading)
-                                .foregroundColor(.white)
-                                .padding()
-                            
-                            Text("Clock-In / Clock-Out")
-                                .foregroundColor(.white)
-                                .fontWeight(.bold)
-                                .font(.system(size: 20))
-                                .padding(Edge.Set.trailing, 65)
-                        }
-                    }
-                    .frame(width: 300, height: 60, alignment: .center)
-                    .background(Color.init(red: 0.42, green: 0.2, blue: 0.42))
-                    .cornerRadius(CGFloat(20))
-                    .padding(.bottom)
-                    .alert(isPresented:$alertClockedIn) {
-                        Alert(title: Text("Clock In"), message: Text("You've already clocked in for the day."), primaryButton: .default(Text("Clock-Out"), action: {
-                            self.employeeAttendanceManager.updateAttendance(email: self.email!, clockInOrClockOut: 2) // Set the clock out time
-                            self.updateClockInOutTime(email: self.email!)
-                        }), secondaryButton: .default(Text("Cancel")))
-                    }
-                    
-                    
                 }
-                .navigationBarTitle(Text("Dashboard"), displayMode: .inline)
-                    .listStyle(GroupedListStyle()) //grouping the sections
+                .alert(isPresented:$alertClockedIn) {
+                    Alert(title: Text("Clock Out?"), message: Text("No more backsies once confirmed."), primaryButton: .default(Text("Clock-Out"), action: {
+                        self.employeeAttendanceManager.updateAttendance(email: self.email!, clockInOrClockOut: 2) // Set the clock out time
+                        self.updateClockInOutTime(email: self.email!)
+                        self.clockOut.toggle()
+                    }), secondaryButton: .default(Text("Cancel")))
+                }
+                
+                Text(clockOut ? "GOOD JOB!" : (clockIn ? "CLOCK OUT" : "CLOCK IN"))
+                Text(clockOut ? "You're done for today." : "")
+                
+                Spacer()
+                
+                HStack{
+                    Spacer()
+                    Image(systemName: "location.circle.fill")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(Color.blue)
+                        .onTapGesture {
+                            self.locationManager.updateLocation(email: self.email ?? "", id: self.userId ?? "", name: self.name ?? "", lat: self.userLatitude, long: self.userLongitude)
+                    }
+                    
+                }.padding()
             }
+                
             .tabItem{
                 VStack{
                     Image(systemName: "person.3.fill")
@@ -127,23 +106,21 @@ struct EmployeeUIView: View {
                 }
             }
             .tag(0)
-            
-            
             NavigationView{
                 List{
                     ForEach(employeeAttendanceManager.employeeAttendance) { employee in
+                        
+                        VStack(alignment: .leading) {
+                            Text("Clock-In: \(employee.clockInTime)")
+                                .foregroundColor(.green)
+                            Text("Clock-Out: \(employee.clockOutTime)")
+                                .foregroundColor(.red)
                             
-                            VStack(alignment: .leading) {
-                                Text("Clock-In: \(employee.clockInTime)")
-                                    .foregroundColor(.green)
-                                Text("Clock-Out: \(employee.clockOutTime)")
-                                    .foregroundColor(.red)
-                                
-                                Text(employee.email)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
+                            Text(employee.email)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
                         }
+                    }
                 }
                 .navigationBarTitle(Text("Attendance"), displayMode: .inline)
                     .listStyle(GroupedListStyle()) //grouping the sections
@@ -156,30 +133,27 @@ struct EmployeeUIView: View {
                 }
             }
             .tag(1)
-            Text("LogOut")
-                .transition(.slide)
-                .tabItem{
-                    VStack{
-                        Image(systemName: "person.crop.circle.fill")
-                        Text("Settings")
-                    }
+            ProfileView()
+            .tabItem{
+                VStack{
+                    Image(systemName: "person.crop.circle.fill")
+                    Text("Profile")
+                }
             }
             .tag(2)
             
         }
         .onAppear {
-            // Do something on Appear of view
             self.updateClockInOutTime(email: self.email!)
             self.employeeAttendanceManager.getAttendance(email: self.email!)
         }
-        
     }
     
     // Below method checks if the user is already clock in.
     // if yes, then update the clock out value.
     // If no, then add a clock in value.
     
-    func checkIfAlreadyClockIn(email: String) {
+    func isClockedIn(email: String) {
         
         let usersRef: DatabaseReference = Database.database().reference()
         let newEmail = email.replacingOccurrences(of: ".", with: ",") // Firebase doesn't allow . so replaced it with ,
@@ -198,9 +172,10 @@ struct EmployeeUIView: View {
                     }
                 })
             } else {
-                print("User does not exist")
                 self.employeeAttendanceManager.updateAttendance(email: email, clockInOrClockOut: 1) // Set the clock in time
                 self.updateClockInOutTime(email: email)
+                self.clockIn.toggle()
+                
             }
         })
     }
@@ -214,7 +189,6 @@ struct EmployeeUIView: View {
             print (newEmail)
             
             if snapshot.hasChild(newEmail){
-//                print("inside checkIfAlreadyClockIn")
                 usersRef.child("attendance").child(newEmail).observeSingleEvent(of: .value, with: { (snapshot) in
                     for child in snapshot.children.allObjects as! [DataSnapshot] {
                         let dict = child.value as? [String : AnyObject] ?? [:]
@@ -240,8 +214,8 @@ struct EmployeeUIView: View {
     }
 }
 
-struct EmployeeUIView_Previews: PreviewProvider {
+struct EmployeeView_Previews: PreviewProvider {
     static var previews: some View {
-        EmployeeUIView()
+        EmployeeView()
     }
 }

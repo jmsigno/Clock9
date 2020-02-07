@@ -2,7 +2,7 @@
 //  AttendanceListUIView.swift
 //  Clock9
 //
-//  Created by Ankit Khanna on 06/02/20.
+//  Created by Jdrake on 06/02/20.
 //  Copyright © 2020 jmsigno. All rights reserved.
 //
 
@@ -25,13 +25,11 @@ struct AttendanceListUIView: View {
                 VStack(alignment: .leading) {
                     Text("Clock-In: \(employee.clockInTime); Clock-Out: \(employee.clockOutTime)")
                         .foregroundColor(.green)
-                    Text(employee.email)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                    //Text(employee.email)
+                      //  .font(.subheadline)
+                        //.foregroundColor(.secondary)
                 }
             }
-            
-            
         }
         .onAppear {
             print ("Email: \(self.email)")

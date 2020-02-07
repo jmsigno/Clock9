@@ -15,7 +15,6 @@ struct AdminView: View {
     @State private var showModal = false
     @State var isProfileViewPresented = false
     
-    //    ref = Database.database().reference()
     var body: some View {
         
         TabView{
@@ -60,7 +59,6 @@ struct AdminView: View {
                     }
             }
             .tag(1)
-            
             ProfileView()
             .tabItem{
                 VStack{
@@ -94,22 +92,26 @@ struct AdminView: View {
 struct AdminView_Previews: PreviewProvider {
     static var previews: some View {
         
-        Group{
-            AdminView(manage: EmployeeManager(employees: testData))
-            .environment(\.colorScheme, .dark)
-            .previewDisplayName("Default")
-            
-            AdminView(manage: EmployeeManager(employees: testData))
-            .previewDevice(PreviewDevice(rawValue: "iPhone 10"))
-            .previewDisplayName("iPhone 10")
-            .environment(\.colorScheme, .dark)
-            
-            AdminView(manage: EmployeeManager(employees: testData))
-            .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
-            .previewDisplayName("XS Max")
-            .environment(\.colorScheme, .dark)
-    
-        }
+        AdminView(manage: EmployeeManager(employees: testData))
+        .environment(\.colorScheme, .dark)
+        .previewDisplayName("Default")
+//
+//        Group{
+//            AdminView(manage: EmployeeManager(employees: testData))
+//            .environment(\.colorScheme, .dark)
+//            .previewDisplayName("Default")
+//
+//            AdminView(manage: EmployeeManager(employees: testData))
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 10"))
+//            .previewDisplayName("iPhone 10")
+//            .environment(\.colorScheme, .dark)
+//
+//            AdminView(manage: EmployeeManager(employees: testData))
+//            .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
+//            .previewDisplayName("XS Max")
+//            .environment(\.colorScheme, .dark)
+//
+//        }
         
     }
 }

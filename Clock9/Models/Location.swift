@@ -6,9 +6,8 @@
 //  Copyright © 2020 jmsigno. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
-
+import Combine
 
 struct Location: Identifiable {
     var id = UUID()

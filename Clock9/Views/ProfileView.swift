@@ -7,7 +7,6 @@
 //
 
 import Firebase
-import GoogleSignIn
 import SwiftUI
 
 struct ProfileView: View {
@@ -38,7 +37,6 @@ struct ProfileView: View {
                 Section{
                     Button(action: {
                         try! Auth.auth().signOut()
-                        GIDSignIn.sharedInstance()?.signOut()
                         UserDefaults.standard.set(false, forKey: "status")
                         NotificationCenter.default.post(name: NSNotification.Name("statusChange"), object: nil)
                         

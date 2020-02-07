@@ -17,21 +17,21 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            if self.isUnlocked {
-                Text("Unlocked")
+            //if self.isUnlocked {
                 if status {
                     if userType == "Admin" {
                         AdminView()
                     } else {
-                        EmployeeUIView()
+                        //EmployeeUIView()
+                        EmployeeView()
                     }
                 } else {
                     LoginScreen()
                 }
                 
-            } else {
-                LoginScreen()
-            }
+            //} else {
+            //    LoginScreen()
+            //}
             
             
         }.animation(.spring())
