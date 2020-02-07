@@ -17,26 +17,23 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            if status {
-                if userType == "Admin" {
-                    AdminView()
+            if self.isUnlocked {
+                Text("Unlocked")
+                if status {
+                    if userType == "Admin" {
+                        AdminView()
+                    } else {
+                        EmployeeUIView()
+                    }
                 } else {
-                    EmployeeUIView()
+                    LoginScreen()
                 }
-//                if self.isUnlocked {
-//                    Text("Unlocked")
-//                    if userType == "Admin" {
-//                        AdminView()
-//                    } else {
-//                        EmployeeUIView()
-//                    }
-//                } else {
-//                    LoginScreen()
-//                }
-            }
-            else{
+                
+            } else {
                 LoginScreen()
             }
+            
+            
         }.animation(.spring())
             .onAppear{
                 self.authenticate()
