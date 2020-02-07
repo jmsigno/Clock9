@@ -26,6 +26,7 @@
 		8523F9A823E719FD00829A7F /* EmployeeAttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8523F9A523E719FD00829A7F /* EmployeeAttendanceManager.swift */; };
 		856BDF7923D5A3F300DC73B3 /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856BDF7823D5A3F300DC73B3 /* AdminView.swift */; };
 		856BDF7B23D5CAF800DC73B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 856BDF7A23D5CAF800DC73B3 /* GoogleService-Info.plist */; };
+		C559D46623ED2D0A00952F22 /* AttendanceListUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C559D46523ED2D0A00952F22 /* AttendanceListUIView.swift */; };
 		C56B049623D72D24006976D2 /* TrackEmployeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56B049523D72D24006976D2 /* TrackEmployeeView.swift */; };
 		C56B049823D82D25006976D2 /* AddEmployeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56B049723D82D25006976D2 /* AddEmployeeView.swift */; };
 		C56B049C23D95ABA006976D2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56B049B23D95ABA006976D2 /* ImagePicker.swift */; };
@@ -60,6 +61,7 @@
 		856BDF7823D5A3F300DC73B3 /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
 		856BDF7A23D5CAF800DC73B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA867E77C397D526AFC2B299 /* Pods-Clock9.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock9.release.xcconfig"; path = "Target Support Files/Pods-Clock9/Pods-Clock9.release.xcconfig"; sourceTree = "<group>"; };
+		C559D46523ED2D0A00952F22 /* AttendanceListUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceListUIView.swift; sourceTree = "<group>"; };
 		C56B049523D72D24006976D2 /* TrackEmployeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEmployeeView.swift; sourceTree = "<group>"; };
 		C56B049723D82D25006976D2 /* AddEmployeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeeView.swift; sourceTree = "<group>"; };
 		C56B049B23D95ABA006976D2 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				8523F9A123E7197400829A7F /* EmployeeUIView.swift */,
 				850F134A23D30CC000468CB4 /* ContentView.swift */,
 				850F136623D3458400468CB4 /* EmployeeDetail.swift */,
+				C559D46523ED2D0A00952F22 /* AttendanceListUIView.swift */,
 				C56B049723D82D25006976D2 /* AddEmployeeView.swift */,
 				850F136A23D4C87400468CB4 /* LoginScreen.swift */,
 				C56B049B23D95ABA006976D2 /* ImagePicker.swift */,
@@ -341,6 +344,7 @@
 				C56B04AC23DB4101006976D2 /* MapAnnotations.swift in Sources */,
 				C56B049823D82D25006976D2 /* AddEmployeeView.swift in Sources */,
 				850F134B23D30CC000468CB4 /* ContentView.swift in Sources */,
+				C559D46623ED2D0A00952F22 /* AttendanceListUIView.swift in Sources */,
 				C56B049E23D9BB6F006976D2 /* UploadFile.swift in Sources */,
 				856BDF7923D5A3F300DC73B3 /* AdminView.swift in Sources */,
 			);

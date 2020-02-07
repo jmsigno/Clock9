@@ -13,6 +13,7 @@ struct EmployeeDetail: View {
     let employee: Employee
     @State private var zoomed: Bool = false
     @State var selection: Int? = nil
+    @State var selectionAttendance: Int? = nil
     
     var body: some View {
         //ScrollView(Axis.Set.vertical, showsIndicators: true) {
@@ -63,7 +64,7 @@ struct EmployeeDetail: View {
                                 .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                                 //.cornerRadius(10)
                                 .background(Color.white)
-                                NavigationLink(destination: Text("Attendace View"), tag: 2, selection: $selection) {
+                                NavigationLink(destination: AttendanceListUIView(email: employee.email), tag: 2, selection: $selection) {
                                         Image(systemName: "clock.fill")
                                             .resizable()
                                             .frame(width: 40, height: 40, alignment: .center)

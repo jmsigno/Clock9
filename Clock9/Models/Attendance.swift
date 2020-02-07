@@ -7,7 +7,8 @@
 //
 
 import Foundation
-
+import SwiftUI
+import Combine
 
 struct Attendance: Identifiable {
     var id = UUID()
