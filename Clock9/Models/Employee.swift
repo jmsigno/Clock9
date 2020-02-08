@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 
 struct Employee : Identifiable{
+    
     var id = UUID()
     var name: String
     var email: String

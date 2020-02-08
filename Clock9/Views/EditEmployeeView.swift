@@ -8,12 +8,11 @@
 
 import SwiftUI
 import Firebase
+import SDWebImageSwiftUI
 
 struct EditEmployeeView: View {
     
     let employee: Employee
-
-    let defaultImageURL = "https://firebasestorage.googleapis.com/v0/b/clock9-f4f07.appspot.com/o/imagesFolder%2Ffile:%2FUsers%2Fankitkhanna%2FLibrary%2FDeveloper%2FCoreSimulator%2FDevices%2FCD06068A-9CFF-4871-A3E5-B618259192E8%2Fdata%2FContainers%2FData%2FApplication%2FD9B402BA-5204-44BF-AC9A-0E852F7CA5F0%2FDocuments%2F257F786A-79ED-4A55-96B4-54CC5662F020.png?alt=media&token=8567123f-0961-45df-84a2-c13db8179762"
     @State private var firstName: String =  ""
     @State private var email: String =  ""
     @State private var password: String =  ""
@@ -56,63 +55,72 @@ struct EditEmployeeView: View {
         
         ZStack {
             Color
-                .init(red: 0.742, green: 0.242, blue: 0.242)
+                .init(red: 255, green: 255, blue: 255)
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             
             ScrollView(Axis.Set.vertical, showsIndicators: true) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("Create Employee").font(.title).padding().foregroundColor(.white).padding(.top, 20)
-                    Text("Choose Image to Upload").padding().foregroundColor(.white)
+                    Text("Update Details").font(.title).padding().foregroundColor(.black).padding(20)
                 }
                 // Choose Image to upload
                 
                 
-                VStack {
-                    
-                    if (uiImage == nil) {
-                        
-                        Image(systemName: "camera.on.rectangle")
-                            .accentColor(Color.purple)
-                            .background(
-                                Color.gray
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(6))
+                VStack{
+                    ZStack(alignment: .bottomTrailing){
+                        if (uiImage == nil) {
+                            WebImage(url: URL(string: employee.imageUrl))
+                                .onSuccess {
+                                    image, cacheType in
+                            }
+                            .resizable()
+                            .frame(width: 100, height: 100).foregroundColor(.secondary)
+                            .clipShape(Circle())
                             .onTapGesture {
                                 self.showImagePicker = true
-                        }
-                    } else {
-                        Image(uiImage: uiImage!)
+                            }
+                        } else {
+                            Image(uiImage: uiImage!)
                             .resizable()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(6)
+                            .frame(width: 100, height: 100).foregroundColor(.secondary)
+                            .clipShape(Circle())
                             .onTapGesture {
                                 self.showAction = true
+                            }
                         }
+                        
+                        Image(systemName: "camera.on.rectangle")
+                        .resizable()
+                        .frame(width: 20, height: 20).foregroundColor(.white)
+                        .background(
+                            Color.secondary
+                                .frame(width: 30, height: 30)
+                                .cornerRadius(6))
                     }
-                    
-                } .frame(width: 200, height: 50, alignment: .center)
-                    
-                    
-                    
-                    .sheet(isPresented: $showImagePicker, onDismiss: {
-                        self.showImagePicker = false
-                    }, content: {
-                        ImagePicker(isShown: self.$showImagePicker, uiImage: self.$uiImage)
-                    })
-                    
-                    .actionSheet(isPresented: $showAction) {
-                        sheet
+                    Text("Choose Image to Upload")
+                        .foregroundColor(.secondary)
                 }
-       
+                    .frame(width: 200, height: 50, alignment: .center)
+                    .sheet(isPresented: $showImagePicker, onDismiss: {
+                            self.showImagePicker = false
+                        }, content: {
+                            ImagePicker(isShown: self.$showImagePicker, uiImage: self.$uiImage)
+                        })
+                    .actionSheet(isPresented: $showAction) {
+                            sheet
+                    }
                 
                 // Full Name
                 ZStack {
                     Capsule()
-                        .fill(Color.white)
+                    .fill(Color.white)
+                    .overlay(
+                        Capsule()
+                            .stroke(Color.secondary, lineWidth: 1)
+                    )
                         .frame(width: CGFloat(370), height: CGFloat(50))
                         .padding()
                     
-                    TextField("Please enter your full name", text: $firstName)
+                    TextField("Full Name", text: $firstName)
                         .frame(width: CGFloat(300), height: CGFloat(50), alignment: .center)
                         //                                                .background(Color.white)
                         .font(.body)
@@ -129,16 +137,19 @@ struct EditEmployeeView: View {
                 ZStack {
                     Capsule()
                         .fill(Color.white)
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.secondary, lineWidth: 1)
+                    )
                         .frame(width: CGFloat(370), height: CGFloat(50))
                         .padding()
                     
-                    TextField("Please enter your email address", text: $email)
+                    TextField("Email Address", text: $email)
                         .frame(width: CGFloat(300), height: CGFloat(50), alignment: .center)
-                        //                                                .background(Color.white)
                         .font(.body)
                         .foregroundColor(Color.init(red: 0.742, green: 0.242, blue: 0.242))
-                        .autocapitalization(UITextAutocapitalizationType.none)
                         .padding()
+                        .autocapitalization(UITextAutocapitalizationType.none)
                         .alert(isPresented:$checkUserAlert) {
                             Alert(title: Text("Check Email"), message: Text("Employee already exist with the email ID."), dismissButton: .default(Text("OK")))
                     }
@@ -147,13 +158,16 @@ struct EditEmployeeView: View {
                 // Password
                 ZStack {
                     Capsule()
-                        .fill(Color.white)
+                    .fill(Color.white)
+                    .overlay(
+                        Capsule()
+                            .stroke(Color.secondary, lineWidth: 1)
+                    )
                         .frame(width: CGFloat(370), height: CGFloat(50))
                         .padding()
                     
-                    TextField("Please enter your Password", text: $password)
+                    TextField("Password", text: $password)
                         .frame(width: CGFloat(300), height: CGFloat(50), alignment: .center)
-                        //                                                .background(Color.white)
                         .font(.body)
                         .foregroundColor(Color.init(red: 0.742, green: 0.242, blue: 0.242))
                         .padding()
@@ -162,26 +176,25 @@ struct EditEmployeeView: View {
                 // Phone
                 ZStack {
                     Capsule()
-                        .fill(Color.white)
+                    .fill(Color.white)
+                    .overlay(
+                        Capsule()
+                            .stroke(Color.secondary, lineWidth: 1)
+                    )
                         .frame(width: CGFloat(370), height: CGFloat(50))
                         .padding()
                     
-                    TextField("Please enter your Phone Number", text: $phone)
+                    TextField("Phone Number", text: $phone)
                         .frame(width: CGFloat(300), height: CGFloat(50), alignment: .center)
-                        //                                                .background(Color.white)
                         .font(.body)
                         .foregroundColor(Color.init(red: 0.742, green: 0.242, blue: 0.242))
                         .padding()
                 }
                 
-                
-                
-                
-                
                 Divider()
                 // Save Employee
                 Button(action: {
-                    self.editEmployee(employee: self.employee, userType: 2)
+                    self.editEmployee(employee: self.employee, userType: self.employee.userType)
                 }) {
                     HStack {
                         Image(systemName: "plus.circle.fill")
@@ -198,12 +211,16 @@ struct EditEmployeeView: View {
                     }
                 }
                 .frame(width: 300, height: 60, alignment: .center)
-                .background(Color.green)
+                .background(Color.blue)
                 .cornerRadius(CGFloat(20))
                 .padding(.all)
-                    
                 
-                
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Cancel")
+                        .foregroundColor(.red)
+                }
             }
         }.onAppear {
             self.firstName = self.employee.name
@@ -221,12 +238,12 @@ struct EditEmployeeView: View {
         if let profileImage = uiImage {
             upload.uploadImage(id: id, name: firstName, email: email, password: password, phone: phone, type: userType, image: profileImage)
         } else {
-            manage.editEmployee(id: id, name: firstName, email: email, password: password, phone: phone, type: userType, firebaseURL: defaultImageURL)
+            manage.editEmployee(id: id, name: firstName, email: email, password: password, phone: phone, type: userType, firebaseURL: employee.imageUrl)
         }
         self.showingAlert = true
         
     }
-
+    
     
     
 }

@@ -12,28 +12,25 @@ import GoogleSignIn
 
 struct AdminView: View {
     @ObservedObject var manage = EmployeeManager()
-    @State private var showModal = false
-    @State var isProfileViewPresented = false
+    @State private var showAddEmployeeSheet = false
+    let loggedInUser = UserDefaults.standard.string(forKey: "loggedInUser")
     
     var body: some View {
-        
         TabView{
-            
             NavigationView{
                 List{
                     Section{
                         Button(action: {
-                              self.showModal = true
-                          }) {
-                              Text("Add Employee")
+                            self.showAddEmployeeSheet = true
+                        }) {
+                            Text("Add Employee")
                                 .foregroundColor(.green)
-                          }.sheet(isPresented: self.$showModal) {
-                              AddEmployeeView()
-                          }
+                        }.sheet(isPresented: self.$showAddEmployeeSheet) {
+                            AddEmployeeView()
+                        }
                     }
                     
                     Section{
-            
                         ForEach(manage.employees) { employee in
                             EmployeeList(employee: employee)
                         }
@@ -41,7 +38,7 @@ struct AdminView: View {
                     }
                 }
                 .navigationBarTitle(Text("Employees"), displayMode: .inline)
-                .listStyle(GroupedListStyle()) //grouping the sections
+                    .listStyle(GroupedListStyle()) //grouping the sections
             }
             .tabItem{
                 VStack{
@@ -59,28 +56,26 @@ struct AdminView: View {
                     }
             }
             .tag(1)
-            ProfileView()
-            .tabItem{
-                VStack{
-                    Image(systemName: "person.crop.circle.fill")
-                    Text("Profile")
-                }
+            ProfileView(email: self.loggedInUser!)
+                .tabItem{
+                    VStack{
+                        Image(systemName: "person.crop.circle.fill")
+                        Text("Profile")
+                    }
             }
             .tag(2)
-            
         }
         .onAppear {
             self.manage.fetchData()
         }
-        
     }
-
+    
     //create add employee interface
     func addEmployee(){
         manage.employees.append(Employee(name: "War Machine", email: "warmachine@clock9.com", password: "123456", phone: "1284321", userType: 2, imageUrl: ""))
     }
     
-    
+    //Delete Employee
     func deleteEmployee(at offsets: IndexSet) {
         if let empObject = manage.employees[offsets.first!] as Employee? {
             manage.deleteEmployee(email: empObject.email)
@@ -93,25 +88,25 @@ struct AdminView_Previews: PreviewProvider {
     static var previews: some View {
         
         AdminView(manage: EmployeeManager(employees: testData))
-        .environment(\.colorScheme, .dark)
-        .previewDisplayName("Default")
-//
-//        Group{
-//            AdminView(manage: EmployeeManager(employees: testData))
-//            .environment(\.colorScheme, .dark)
-//            .previewDisplayName("Default")
-//
-//            AdminView(manage: EmployeeManager(employees: testData))
-//            .previewDevice(PreviewDevice(rawValue: "iPhone 10"))
-//            .previewDisplayName("iPhone 10")
-//            .environment(\.colorScheme, .dark)
-//
-//            AdminView(manage: EmployeeManager(employees: testData))
-//            .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
-//            .previewDisplayName("XS Max")
-//            .environment(\.colorScheme, .dark)
-//
-//        }
+            .environment(\.colorScheme, .dark)
+            .previewDisplayName("Default")
+        //
+        //        Group{
+        //            AdminView(manage: EmployeeManager(employees: testData))
+        //            .environment(\.colorScheme, .dark)
+        //            .previewDisplayName("Default")
+        //
+        //            AdminView(manage: EmployeeManager(employees: testData))
+        //            .previewDevice(PreviewDevice(rawValue: "iPhone 10"))
+        //            .previewDisplayName("iPhone 10")
+        //            .environment(\.colorScheme, .dark)
+        //
+        //            AdminView(manage: EmployeeManager(employees: testData))
+        //            .previewDevice(PreviewDevice(rawValue: "iPhone XS Max"))
+        //            .previewDisplayName("XS Max")
+        //            .environment(\.colorScheme, .dark)
+        //
+        //        }
         
     }
 }

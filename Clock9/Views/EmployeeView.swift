@@ -41,64 +41,66 @@ struct EmployeeView: View {
     
     var body: some View {
         TabView{
-            
-            VStack{
-                HStack{
-                    VStack(alignment: .leading, spacing: 10){
-                        HStack {
-                            Text("Clock In: ")
-                            Text(clockInTime).foregroundColor(.blue)
-                            
-                        }
-                        HStack {
-                            Text("Clock Out: ")
-                            Text(clockOutTime).foregroundColor(.blue)
-                            
-                        }
+            NavigationView{
+                VStack{
+                    HStack{
+                        VStack(alignment: .leading, spacing: 10){
+                            HStack {
+                                Text("Clock In: ")
+                                Text(clockInTime).foregroundColor(.blue)
+                                
+                            }
+                            HStack {
+                                Text("Clock Out: ")
+                                Text(clockOutTime).foregroundColor(.blue)
+                                
+                            }
+                        }.padding()
+                        Spacer()
                     }.padding()
+                    
+                    
                     Spacer()
-                }.padding()
-                
-                
-                Spacer()
-                Image(systemName: "clock.fill")
-                .resizable()
-                .frame(width: 160, height: 160)
-                    .foregroundColor(clockOut ? .secondary : (clockIn ? .red : .green))
-                .clipShape(Circle())
-                .onTapGesture {
-                    withAnimation(.default) {
-                        if !self.clockOut{
-                            self.isClockedIn(email: self.email!)
-                        }
-                    }
-                }
-                .alert(isPresented:$alertClockedIn) {
-                    Alert(title: Text("Clock Out?"), message: Text("No more backsies once confirmed."), primaryButton: .default(Text("Clock-Out"), action: {
-                        self.employeeAttendanceManager.updateAttendance(email: self.email!, clockInOrClockOut: 2) // Set the clock out time
-                        self.updateClockInOutTime(email: self.email!)
-                        self.clockOut.toggle()
-                    }), secondaryButton: .default(Text("Cancel")))
-                }
-                
-                Text(clockOut ? "GOOD JOB!" : (clockIn ? "CLOCK OUT" : "CLOCK IN"))
-                Text(clockOut ? "You're done for today." : "")
-                
-                Spacer()
-                
-                HStack{
-                    Spacer()
-                    Image(systemName: "location.circle.fill")
-                    .resizable()
-                    .frame(width: 60, height: 60)
-                    .foregroundColor(Color.blue)
+                    Image(systemName: "clock.fill")
+                        .resizable()
+                        .frame(width: 160, height: 160)
+                        .foregroundColor(clockOut ? .secondary : (clockIn ? .red : .green))
+                        .clipShape(Circle())
                         .onTapGesture {
-                            self.locationManager.updateLocation(email: self.email ?? "", id: self.userId ?? "", name: self.name ?? "", lat: self.userLatitude, long: self.userLongitude)
+                            withAnimation(.default) {
+                                if !self.clockOut{
+                                    self.isClockedIn(email: self.email!)
+                                }
+                            }
+                    }
+                    .alert(isPresented:$alertClockedIn) {
+                        Alert(title: Text("Clock Out?"), message: Text("No more backsies once confirmed."), primaryButton: .default(Text("Clock-Out"), action: {
+                            self.employeeAttendanceManager.updateAttendance(email: self.email!, clockInOrClockOut: 2) // Set the clock out time
+                            self.updateClockInOutTime(email: self.email!)
+                            self.clockOut.toggle()
+                        }), secondaryButton: .default(Text("Cancel")))
                     }
                     
-                }.padding()
+                    Text(clockOut ? "GOOD JOB!" : (clockIn ? "CLOCK OUT" : "CLOCK IN"))
+                    Text(clockOut ? "You're done for today." : "")
+                    
+                    Spacer()
+                    
+                    HStack{
+                        Spacer()
+                        Image(systemName: "location.circle.fill")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .foregroundColor(Color.blue)
+                            .onTapGesture {
+                                self.locationManager.updateLocation(email: self.email ?? "", id: self.userId ?? "", name: self.name ?? "", lat: self.userLatitude, long: self.userLongitude)
+                        }
+                        
+                    }.padding()
+                }
+                .navigationBarTitle(Text("Dashboard"), displayMode: .inline)
             }
-                
+            .transition(.slide)
             .tabItem{
                 VStack{
                     Image(systemName: "person.3.fill")
@@ -133,12 +135,12 @@ struct EmployeeView: View {
                 }
             }
             .tag(1)
-            ProfileView()
-            .tabItem{
-                VStack{
-                    Image(systemName: "person.crop.circle.fill")
-                    Text("Profile")
-                }
+            ProfileView(email: self.email!)
+                .tabItem{
+                    VStack{
+                        Image(systemName: "person.crop.circle.fill")
+                        Text("Profile")
+                    }
             }
             .tag(2)
             
