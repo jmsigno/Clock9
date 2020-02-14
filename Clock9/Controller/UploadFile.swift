@@ -20,7 +20,6 @@ struct MyKeys {
 }
 
 class uploadFile {
-    
     // Save the UIIMage to a local disk path and return the path to be uploaded to Firebase Storage
     func save(image profileImage: UIImage) -> URL {
         let uid = UUID().uuidString
@@ -30,12 +29,12 @@ class uploadFile {
         try! profileImage.jpegData(compressionQuality: 0.7)?.write(to: url)
         return url
     }
-    // Upload the local saved image to Firebase Storage and return its URL
     
+    // Upload the local saved image to Firebase Storage and return its URL
     func uploadImage(id: UUID, name: String, email: String, password: String, phone: String, type: Int, image profileImage: UIImage) {
         
         let urlString = save(image: profileImage)
-//        print("saved image at disk path: \(urlString)")
+        // print("saved image at disk path: \(urlString)")
         
         // Path to which the image needs to be uploaded i.e imagesFolder in the Firebase Storage
         let imageReference = Storage.storage().reference().child(MyKeys.imagesFolder).child("\(urlString)")
@@ -59,11 +58,9 @@ class uploadFile {
                 let employeeManagerRef = EmployeeManager()
                 employeeManagerRef.createEmployee(id: id, name: name, email: email, password: password, phone: phone, type: type, firebaseURL: "\(downloadURL)")
                 print("Firebase Storage URL: \(downloadURL)")
-               
             }
         }
         uploadTask.resume()
-        
     }
     
 }

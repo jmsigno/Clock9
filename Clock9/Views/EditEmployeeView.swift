@@ -19,12 +19,10 @@ struct EditEmployeeView: View {
     @State private var phone: String =  ""
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    
     @State private var showingAlert = false
     @State private var checkUserAlert = false
     @State var createEmployeeButtonTapped = false
     @ObservedObject var manage = EmployeeManager()
-    
     
     // Image Picker
     @State var showAction: Bool = false
@@ -47,9 +45,7 @@ struct EditEmployeeView: View {
                     self.uiImage = nil
                 })
         ])
-        
     }
-    
     
     var body: some View {
         
@@ -60,11 +56,9 @@ struct EditEmployeeView: View {
             
             ScrollView(Axis.Set.vertical, showsIndicators: true) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("Update Details").font(.title).padding().foregroundColor(.black).padding(20)
+                    Text("Edit Profile").font(.title).padding().foregroundColor(.black).padding(20)
                 }
                 // Choose Image to upload
-                
-                
                 VStack{
                     ZStack(alignment: .bottomTrailing){
                         if (uiImage == nil) {
@@ -80,42 +74,42 @@ struct EditEmployeeView: View {
                             }
                         } else {
                             Image(uiImage: uiImage!)
-                            .resizable()
-                            .frame(width: 100, height: 100).foregroundColor(.secondary)
-                            .clipShape(Circle())
-                            .onTapGesture {
-                                self.showAction = true
+                                .resizable()
+                                .frame(width: 100, height: 100).foregroundColor(.secondary)
+                                .clipShape(Circle())
+                                .onTapGesture {
+                                    self.showAction = true
                             }
                         }
                         
                         Image(systemName: "camera.on.rectangle")
-                        .resizable()
-                        .frame(width: 20, height: 20).foregroundColor(.white)
-                        .background(
-                            Color.secondary
-                                .frame(width: 30, height: 30)
-                                .cornerRadius(6))
+                            .resizable()
+                            .frame(width: 20, height: 20).foregroundColor(.white)
+                            .background(
+                                Color.secondary
+                                    .frame(width: 30, height: 30)
+                                    .cornerRadius(6))
                     }
                     Text("Choose Image to Upload")
                         .foregroundColor(.secondary)
                 }
-                    .frame(width: 200, height: 50, alignment: .center)
-                    .sheet(isPresented: $showImagePicker, onDismiss: {
-                            self.showImagePicker = false
-                        }, content: {
-                            ImagePicker(isShown: self.$showImagePicker, uiImage: self.$uiImage)
-                        })
+                .frame(width: 200, height: 50, alignment: .center)
+                .sheet(isPresented: $showImagePicker, onDismiss: {
+                    self.showImagePicker = false
+                }, content: {
+                    ImagePicker(isShown: self.$showImagePicker, uiImage: self.$uiImage)
+                })
                     .actionSheet(isPresented: $showAction) {
-                            sheet
-                    }
+                        sheet
+                }
                 
                 // Full Name
                 ZStack {
                     Capsule()
-                    .fill(Color.white)
-                    .overlay(
-                        Capsule()
-                            .stroke(Color.secondary, lineWidth: 1)
+                        .fill(Color.white)
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.secondary, lineWidth: 1)
                     )
                         .frame(width: CGFloat(370), height: CGFloat(50))
                         .padding()
@@ -158,10 +152,10 @@ struct EditEmployeeView: View {
                 // Password
                 ZStack {
                     Capsule()
-                    .fill(Color.white)
-                    .overlay(
-                        Capsule()
-                            .stroke(Color.secondary, lineWidth: 1)
+                        .fill(Color.white)
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.secondary, lineWidth: 1)
                     )
                         .frame(width: CGFloat(370), height: CGFloat(50))
                         .padding()
@@ -176,10 +170,10 @@ struct EditEmployeeView: View {
                 // Phone
                 ZStack {
                     Capsule()
-                    .fill(Color.white)
-                    .overlay(
-                        Capsule()
-                            .stroke(Color.secondary, lineWidth: 1)
+                        .fill(Color.white)
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.secondary, lineWidth: 1)
                     )
                         .frame(width: CGFloat(370), height: CGFloat(50))
                         .padding()
@@ -243,9 +237,6 @@ struct EditEmployeeView: View {
         self.showingAlert = true
         
     }
-    
-    
-    
 }
 
 struct EditEmployeeView_Previews: PreviewProvider {

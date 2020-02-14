@@ -10,7 +10,6 @@ import SwiftUI
 import Combine
 
 struct Employee : Identifiable{
-    
     var id = UUID()
     var name: String
     var email: String
@@ -20,18 +19,14 @@ struct Employee : Identifiable{
     var imageUrl: String
     var imageName: String{
         return name
-        
     }
     var thumbnailName: String{
         return name + "Thumb"
     }
 }
 
-
-
-
+//Test Data
 #if DEBUG
-
 let testData = [
     Employee(name: "Ironman", email: "ironman@clock9.com", password: "123456", phone: "1234321", userType: 2, imageUrl: ""),
     Employee(name: "Black Widow", email: "blackwidow@clock9.com", password: "123456", phone: "1238321", userType: 2, imageUrl: ""),
@@ -47,7 +42,6 @@ let testData = [
     Employee(name: "Spiderman", email: "spiderman@clock9.com", password: "123456", phone: "1234391", userType: 2, imageUrl: ""),
     Employee(name: "Thor", email: "thor@clock9.com", password: "123456", phone: "1234321", userType: 2, imageUrl: ""),
 ]
-
 #endif
 
 

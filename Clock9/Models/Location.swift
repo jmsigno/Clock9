@@ -17,8 +17,6 @@ struct Location: Identifiable {
     var name : String
     var userId : String
     var email : String
-    
-
 }
 
 struct currentLocation: Identifiable {

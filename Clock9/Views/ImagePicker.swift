@@ -5,7 +5,7 @@
 //  Created by Jdrake on 1/20/20.
 //  Copyright © 2020 jmsigno. All rights reserved.
 //
-// Code taken from https://stackoverflow.com/questions/56515871/how-to-open-the-imagepicker-in-swiftui
+// Credits to https://stackoverflow.com/questions/56515871/how-to-open-the-imagepicker-in-swiftui
 
 import Foundation
 import SwiftUI

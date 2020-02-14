@@ -37,7 +37,6 @@ class EmployeeAttendanceManager: ObservableObject {
                 })
             } else {
                 print("User does not exist")
-                
             }
         })
     }
@@ -59,7 +58,6 @@ class EmployeeAttendanceManager: ObservableObject {
         let employeeRef: DatabaseReference = usersRef.child(newEmail).child(dateHeader)
         var clockInTime = ""
         var clockOutTime = ""
-        
         var employeeItem = [String:Any]()
         
         if clockInOrClockOut == 1 {
@@ -76,11 +74,7 @@ class EmployeeAttendanceManager: ObservableObject {
             "clock_out_time" : clockOutTime,
             ] as [String : Any]
         employeeRef.setValue(employeeItem)
-        
-        
-        
     }
-    
     
     @Published var employeeAttendance = [Attendance]()
 }

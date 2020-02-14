@@ -48,17 +48,14 @@ struct EmployeeView: View {
                             HStack {
                                 Text("Clock In: ")
                                 Text(clockInTime).foregroundColor(.blue)
-                                
                             }
                             HStack {
                                 Text("Clock Out: ")
                                 Text(clockOutTime).foregroundColor(.blue)
-                                
                             }
                         }.padding()
                         Spacer()
                     }.padding()
-                    
                     
                     Spacer()
                     Image(systemName: "clock.fill")
@@ -154,7 +151,6 @@ struct EmployeeView: View {
     // Below method checks if the user is already clock in.
     // if yes, then update the clock out value.
     // If no, then add a clock in value.
-    
     func isClockedIn(email: String) {
         
         let usersRef: DatabaseReference = Database.database().reference()

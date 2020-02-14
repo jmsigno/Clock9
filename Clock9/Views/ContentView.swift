@@ -33,7 +33,6 @@ struct ContentView: View {
             //    LoginScreen()
             //}
             
-            
         }.animation(.spring())
             .onAppear{
                 self.authenticate()
@@ -72,8 +71,6 @@ struct ContentView: View {
             // no biometrics
         }
     }
-    
-    
 }
 
 struct ContentView_Previews: PreviewProvider {

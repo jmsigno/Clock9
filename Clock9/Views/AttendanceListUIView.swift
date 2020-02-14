@@ -25,9 +25,6 @@ struct AttendanceListUIView: View {
                 VStack(alignment: .leading) {
                     Text("Clock-In: \(employee.clockInTime); Clock-Out: \(employee.clockOutTime)")
                         .foregroundColor(.green)
-                    //Text(employee.email)
-                      //  .font(.subheadline)
-                        //.foregroundColor(.secondary)
                 }
             }
         }
@@ -38,7 +35,6 @@ struct AttendanceListUIView: View {
         .navigationBarTitle(Text("Attendance"), displayMode: .inline)
             .listStyle(GroupedListStyle()) //grouping the sections
     }
-    
 }
 
 struct AttendanceListUIView_Previews: PreviewProvider {

@@ -11,7 +11,7 @@ import Firebase
 
 struct AddEmployeeView: View {
     
-    let defaultImageURL = "https://firebasestorage.googleapis.com/v0/b/clock9-f4f07.appspot.com/o/imagesFolder%2Ffile:%2FUsers%2Fankitkhanna%2FLibrary%2FDeveloper%2FCoreSimulator%2FDevices%2FCD06068A-9CFF-4871-A3E5-B618259192E8%2Fdata%2FContainers%2FData%2FApplication%2FD9B402BA-5204-44BF-AC9A-0E852F7CA5F0%2FDocuments%2F257F786A-79ED-4A55-96B4-54CC5662F020.png?alt=media&token=8567123f-0961-45df-84a2-c13db8179762"
+    let defaultImageURL = "https://firebasestorage.googleapis.com/v0/b/clock9-f4f07.appspot.com/o/imagesFolder%2Ffile:%2FUsers%2Ftemp%2FLibrary%2FDeveloper%2FCoreSimulator%2FDevices%2F4DB83F47-A5B8-4EDD-AA6E-32E427A96B22%2Fdata%2FContainers%2FData%2FApplication%2FB0C6B407-D45F-4FCE-9E6A-65F6D8029617%2FDocuments%2F130456DC-347B-43C9-8E6B-D2BB771FD72F.png?alt=media&token=4b7f702e-b976-464d-a106-75c9a1071124"
     @State private var firstName: String =  ""
     @State private var email: String =  ""
     @State private var password: String =  ""
@@ -23,7 +23,6 @@ struct AddEmployeeView: View {
     @State private var checkUserAlert = false
     @State var createEmployeeButtonTapped = false
     @ObservedObject var manage = EmployeeManager()
-    
     
     // Image Picker
     @State var showAction: Bool = false
@@ -60,7 +59,6 @@ struct AddEmployeeView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Create Employee").font(.title).padding().foregroundColor(.white).padding(20)
                 }.padding()
-                // Choose Image to upload
                 
                 VStack(spacing: 20) {
                     ZStack(alignment: .bottomTrailing){
@@ -210,9 +208,7 @@ struct AddEmployeeView: View {
         }
     }
     
-    
     // Check if Employee Exists in the Firebase Database
-    
     func checkIfEmployeeExists(email: String) {
         
         let usersRef: DatabaseReference = Database.database().reference()
@@ -234,15 +230,12 @@ struct AddEmployeeView: View {
         
     }
 
-    
     // Create Employee Function
     func createEmployee() {
         let id = UUID() // This is to give a unique ID for every user. We are passing it to Firebase DB.
         
         let employeeType = 2 // User Type 1 is Admin 2 is Employee
-        //        manage.employees.append(Employee(name: "War Machine", email: "warmachine@clock9.com", password: "123456", phone: "1284321", userType: employeeType, imageUrl: ""))
-        // manage.createEmployee(id: id, name: firstName, email: email, password: password, phone: phone, type: employeeType)
-        //        First pass the employee data to the upload Image function and when the image gets uploaded successfully then upload the image URL and other data to the Firebase Realtime Database on the completion handler of the upload Image code.
+        //  First pass the employee data to the upload Image function and when the image gets uploaded successfully then upload the image URL and other data to the Firebase Realtime Database on the completion handler of the upload Image code.
         let upload = uploadFile()
         if let profileImage = uiImage {
             upload.uploadImage(id: id, name: firstName, email: email, password: password, phone: phone, type: employeeType, image: profileImage)
@@ -256,7 +249,6 @@ struct AddEmployeeView: View {
     }
     
 }
-
 
 struct AddEmployeeView_Previews: PreviewProvider {
     static var previews: some View {

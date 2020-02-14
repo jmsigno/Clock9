@@ -11,55 +11,40 @@ import MapKit
 import CoreLocation
 import Firebase
 
-
 struct TrackEmployeeView: View {
     let employee: Employee
     @ObservedObject var location = LocationManager()
     @ObservedObject var currentLocationManager = CurrentLocationManager()
     @ObservedObject var employeeLocationManager = EmployeeLocationManager()
-    
     var email = UserDefaults.standard.string(forKey: "loggedInUser")
-
     @State var currentLat: CLLocationDegrees = -37.818212 // Default Lat
     @State var currentLong: CLLocationDegrees = 144.9521133 // Default Long
     
     var body: some View {
-        
-        NavigationView {
-            VStack {
-                MapView(latitude: currentLat, longitude: currentLong, employeeName: employee.name)
-                    .frame(width: 425, height: 500, alignment: .top)
-                    .navigationBarTitle(Text("\(employee.name)'s Locations"),displayMode: .inline)
-                    .edgesIgnoringSafeArea(.bottom)
-                
-                List {
-                    Section{
-                        ForEach(location.locations) { loca in
-                            VStack(alignment: .leading) {
-                                Button(action: {
-                                    self.currentLat = CLLocationDegrees(loca.latitude)!
-                                    self.currentLong = CLLocationDegrees(loca.longitude)!
-                                }) {
-                                    Text("Latitude: \(loca.latitude), Longitude: \(loca.longitude)")
-                                    Text("Time: \(loca.time)")
-                                        .foregroundColor(.green)
-                                }
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
+        VStack {
+            MapView(latitude: currentLat, longitude: currentLong, employeeName: employee.name)
+                .navigationBarTitle(Text("\(employee.name)'s Locations"),displayMode: .inline)
+                .edgesIgnoringSafeArea(.bottom)
+            List {
+                Section{
+                    ForEach(location.locations) { loca in
+                        VStack(alignment: .leading) {
+                            Button(action: {
+                                self.currentLat = CLLocationDegrees(loca.latitude)!
+                                self.currentLong = CLLocationDegrees(loca.longitude)!
+                            }) {
+                                Text("Location on \(loca.time)")
+                                .foregroundColor(.green)
+                                Text("Latitude: \(loca.latitude), Longitude: \(loca.longitude)")
                             }
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
                         }
                     }
-                    
-                    //                    .onDelete(perform: deleteEmployee)
-                    //                    }
-                }.frame(width: 400, height: 300, alignment: .bottomLeading)
+                }
             }
-            
-            
-            
         }
         .onAppear {
-//            self.location.fetchLocations()
             self.fetchEmployeeLastLocation(email: self.employee.email)
         }
     }
@@ -70,13 +55,9 @@ struct TrackEmployeeView: View {
     }
     
     func fetchEmployeeLastLocation(email: String) {
-        
         let usersRef: DatabaseReference = Database.database().reference()
-        
         let newEmail = email.replacingOccurrences(of: ".", with: ",") // Firebase doesn't allow . so replaced it with ,
-        
         usersRef.child("employees").child(newEmail).observeSingleEvent(of: .value, with: { snapshot in
-            
             for child in snapshot.children.allObjects as! [DataSnapshot] {
                 let dict = child.value as? [String : AnyObject] ?? [:]
                 let id = UUID()
@@ -92,13 +73,8 @@ struct TrackEmployeeView: View {
                 self.location.locations.append(loca)
             }
         })
-        
     }
-
-    
-    
 }
-
 
 struct TrackEmployeeView_Previews: PreviewProvider {
     static var previews: some View {

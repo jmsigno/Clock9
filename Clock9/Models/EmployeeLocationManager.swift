@@ -14,11 +14,6 @@ import SwiftUI
 
 class EmployeeLocationManager: NSObject, ObservableObject {
     
-    //     var latitude : String
-    //     var longitude : String
-    //     var time: String
-
-    
     override init() {
         super.init()
         self.locationManager.delegate = self
@@ -43,7 +38,6 @@ class EmployeeLocationManager: NSObject, ObservableObject {
         guard let status = locationStatus else {
             return "unknown"
         }
-        
         switch status {
         case .notDetermined: return "notDetermined"
         case .authorizedWhenInUse: return "authorizedWhenInUse"
@@ -52,15 +46,11 @@ class EmployeeLocationManager: NSObject, ObservableObject {
         case .denied: return "denied"
         default: return "unknown"
         }
-        
     }
     
     let objectWillChange = PassthroughSubject<Void, Never>()
     
     private let locationManager = CLLocationManager()
-    
-    
-    
     
     func updateLocation(email: String, id: String, name: String, lat: CLLocationDegrees, long: CLLocationDegrees) {
         
@@ -86,19 +76,10 @@ class EmployeeLocationManager: NSObject, ObservableObject {
             "date": date,
             ] as [String : Any]
         employeeRef.setValue(employeeItem)
-        
-        
     }
-    
-    
-    
-    
-    
-    
 }
 
 extension EmployeeLocationManager: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         self.locationStatus = status
         print(#function, statusString)

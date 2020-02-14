@@ -10,16 +10,10 @@ import SwiftUI
 import SDWebImageSwiftUI // Library to load image from URL
 
 struct EmployeeList: View {
-    
     let employee: Employee
     
     var body: some View {
         NavigationLink(destination: EmployeeDetail(employee: employee)){
-            //            Image(employee.imageName)
-            /*
-             .clipped()
-             .scaledToFit()
-             .cornerRadius(50) */
             WebImage(url: URL(string: employee.imageUrl)) // Library used to load image from URL
                 .onSuccess { image, cacheType in
                     // Success
@@ -30,7 +24,6 @@ struct EmployeeList: View {
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 1))
             .shadow(radius: 5)
-            
             
             VStack(alignment: .leading) {
                 Text(employee.name)

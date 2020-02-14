@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2444C4CF23ECFF4500E99DA1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2444C4CE23ECFF4500E99DA1 /* ProfileView.swift */; };
+		24DE9E0A23EDE9C1006FD99B /* EmployeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E0823EDE9C1006FD99B /* EmployeeView.swift */; };
+		24DE9E0E23EDF585006FD99B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E0C23EDF585006FD99B /* ProfileView.swift */; };
 		370A1067112A31129C0AB590 /* Pods_Clock9.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D1C6534B24BDE48DA87A4B /* Pods_Clock9.framework */; };
 		850F134723D30CC000468CB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F134623D30CC000468CB4 /* AppDelegate.swift */; };
 		850F134923D30CC000468CB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F134823D30CC000468CB4 /* SceneDelegate.swift */; };
@@ -21,7 +22,6 @@
 		850F136723D3458400468CB4 /* EmployeeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F136623D3458400468CB4 /* EmployeeDetail.swift */; };
 		850F136923D4471800468CB4 /* EmployeeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F136823D4471800468CB4 /* EmployeeManager.swift */; };
 		850F136B23D4C87400468CB4 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F136A23D4C87400468CB4 /* LoginScreen.swift */; };
-		8523F9A223E7197400829A7F /* EmployeeUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8523F9A123E7197400829A7F /* EmployeeUIView.swift */; };
 		8523F9A623E719FD00829A7F /* EmployeeLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8523F9A323E719FD00829A7F /* EmployeeLocationManager.swift */; };
 		8523F9A723E719FD00829A7F /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8523F9A423E719FD00829A7F /* Attendance.swift */; };
 		8523F9A823E719FD00829A7F /* EmployeeAttendanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8523F9A523E719FD00829A7F /* EmployeeAttendanceManager.swift */; };
@@ -41,7 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2444C4CE23ECFF4500E99DA1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		24DE9E0823EDE9C1006FD99B /* EmployeeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeView.swift; sourceTree = "<group>"; };
+		24DE9E0C23EDF585006FD99B /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = ../../../../Downloads/ProfileView.swift; sourceTree = "<group>"; };
 		26D1C6534B24BDE48DA87A4B /* Pods_Clock9.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock9.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		850F134323D30CC000468CB4 /* Clock9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clock9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		850F134623D30CC000468CB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,7 +58,6 @@
 		850F136623D3458400468CB4 /* EmployeeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDetail.swift; sourceTree = "<group>"; };
 		850F136823D4471800468CB4 /* EmployeeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeManager.swift; sourceTree = "<group>"; };
 		850F136A23D4C87400468CB4 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
-		8523F9A123E7197400829A7F /* EmployeeUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeUIView.swift; sourceTree = "<group>"; };
 		8523F9A323E719FD00829A7F /* EmployeeLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeLocationManager.swift; sourceTree = "<group>"; };
 		8523F9A423E719FD00829A7F /* Attendance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
 		8523F9A523E719FD00829A7F /* EmployeeAttendanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeAttendanceManager.swift; sourceTree = "<group>"; };
@@ -145,19 +145,19 @@
 		C56B049323D7287D006976D2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8523F9A123E7197400829A7F /* EmployeeUIView.swift */,
-				850F134A23D30CC000468CB4 /* ContentView.swift */,
-				850F136623D3458400468CB4 /* EmployeeDetail.swift */,
-				C559D46523ED2D0A00952F22 /* AttendanceListUIView.swift */,
 				C56B049723D82D25006976D2 /* AddEmployeeView.swift */,
-				C559D46723ED32C900952F22 /* EditEmployeeView.swift */,
-				850F136A23D4C87400468CB4 /* LoginScreen.swift */,
-				C56B049B23D95ABA006976D2 /* ImagePicker.swift */,
-				C56B04AD23DB42BD006976D2 /* MapView.swift */,
 				856BDF7823D5A3F300DC73B3 /* AdminView.swift */,
-				C56B049523D72D24006976D2 /* TrackEmployeeView.swift */,
+				C559D46523ED2D0A00952F22 /* AttendanceListUIView.swift */,
+				850F134A23D30CC000468CB4 /* ContentView.swift */,
+				C559D46723ED32C900952F22 /* EditEmployeeView.swift */,
+				850F136623D3458400468CB4 /* EmployeeDetail.swift */,
 				850F135C23D315CF00468CB4 /* EmployeeListView.swift */,
-				2444C4CE23ECFF4500E99DA1 /* ProfileView.swift */,
+				24DE9E0823EDE9C1006FD99B /* EmployeeView.swift */,
+				C56B049B23D95ABA006976D2 /* ImagePicker.swift */,
+				850F136A23D4C87400468CB4 /* LoginScreen.swift */,
+				C56B04AD23DB42BD006976D2 /* MapView.swift */,
+				24DE9E0C23EDF585006FD99B /* ProfileView.swift */,
+				C56B049523D72D24006976D2 /* TrackEmployeeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,21 +334,21 @@
 				850F136923D4471800468CB4 /* EmployeeManager.swift in Sources */,
 				C559D46823ED32C900952F22 /* EditEmployeeView.swift in Sources */,
 				8523F9A823E719FD00829A7F /* EmployeeAttendanceManager.swift in Sources */,
+				24DE9E0A23EDE9C1006FD99B /* EmployeeView.swift in Sources */,
 				C56B04B623DC8803006976D2 /* CurrentLocationManager.swift in Sources */,
 				8523F9A723E719FD00829A7F /* Attendance.swift in Sources */,
 				850F135D23D315CF00468CB4 /* EmployeeListView.swift in Sources */,
 				850F134723D30CC000468CB4 /* AppDelegate.swift in Sources */,
 				850F134923D30CC000468CB4 /* SceneDelegate.swift in Sources */,
 				C56B04B223DC162F006976D2 /* Location.swift in Sources */,
-				8523F9A223E7197400829A7F /* EmployeeUIView.swift in Sources */,
 				850F136123D316BA00468CB4 /* Employee.swift in Sources */,
 				850F136B23D4C87400468CB4 /* LoginScreen.swift in Sources */,
 				C56B04B423DC1CE2006976D2 /* LocationManager.swift in Sources */,
+				24DE9E0E23EDF585006FD99B /* ProfileView.swift in Sources */,
 				C56B04AE23DB42BD006976D2 /* MapView.swift in Sources */,
 				8523F9A623E719FD00829A7F /* EmployeeLocationManager.swift in Sources */,
 				C56B049623D72D24006976D2 /* TrackEmployeeView.swift in Sources */,
 				850F136723D3458400468CB4 /* EmployeeDetail.swift in Sources */,
-				2444C4CF23ECFF4500E99DA1 /* ProfileView.swift in Sources */,
 				C56B04AC23DB4101006976D2 /* MapAnnotations.swift in Sources */,
 				C56B049823D82D25006976D2 /* AddEmployeeView.swift in Sources */,
 				850F134B23D30CC000468CB4 /* ContentView.swift in Sources */,

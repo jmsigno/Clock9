@@ -70,11 +70,6 @@ struct AdminView: View {
         }
     }
     
-    //create add employee interface
-    func addEmployee(){
-        manage.employees.append(Employee(name: "War Machine", email: "warmachine@clock9.com", password: "123456", phone: "1284321", userType: 2, imageUrl: ""))
-    }
-    
     //Delete Employee
     func deleteEmployee(at offsets: IndexSet) {
         if let empObject = manage.employees[offsets.first!] as Employee? {

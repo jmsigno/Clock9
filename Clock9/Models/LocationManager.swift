@@ -11,12 +11,8 @@ import SwiftUI
 import Combine
 
 class LocationManager : ObservableObject {
-
     init(locations: [Location] = []){
         self.locations = locations
     }
-    
     @Published var locations = [Location]()
-    
 }
-
